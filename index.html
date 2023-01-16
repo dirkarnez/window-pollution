@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <label for="url">Script:</label>
+    <input type="text" id="url" >
+    <button id="btnLoadAndCheck">load and check</button>
+
+    <script>
+        const snapshot = Object.keys(window).map(item => `${item}`);
+
+        document.getElementById("btnLoadAndCheck").addEventListener('click', function (evt) {
+            const scriptElement = document.createElement("script");
+            scriptElement.type =  'text/javascript';
+            scriptElement.onload = function() {
+                const a = Object.keys(window).map(item => `${item}`).filter(el => !snapshot.includes(el));
+                alert(a.join(","));
+            };
+            
+            scriptElement.src = document.getElementById("url").value
+            document.body.appendChild(scriptElement);
+        });
+
+
+    </script>
+</body>
+</html>
